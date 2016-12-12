@@ -1,4 +1,5 @@
-local test = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas congue tortor quis lectus mattis, porta scelerisque magna vestibulum. Praesent enim erat, luctus sit amet ligula et, vulputate rutrum turpis. Aliquam at quam quis risus interdum blandit. Phasellus volutpat dolor id urna viverra tincidunt. Etiam lorem felis, mattis id ligula ac, mollis dictum nibh. Curabitur condimentum sollicitudin auctor. Morbi vitae erat felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nullam scelerisque, justo quis accumsan fringilla, libero dui ornare lectus, vitae volutpat magna odio ac magna. In id congue eros, rhoncus sagittis nibh. Sed efficitur, erat a fringilla facilisis, neque eros iaculis felis, tristique laoreet velit odio eget libero. Donec quis risus sit amet tellus efficitur suscipit. Cras blandit id ligula et rutrum. Maecenas et ante odio. Vestibulum sed accumsan lacus, non mollis est. Duis in eleifend ligula. Nullam sit amet sapien in ligula pretium condimentum nec sit amet tellus. Donec auctor, justo ac facilisis dapibus, ex nisl venenatis lacus, et aliquet nunc turpis facilisis magna. Proin ornare eleifend aliquam. In ullamcorper volutpat urna sed vulputate. Vestibulum a neque ultrices, finibus purus eu, condimentum lorem. Etiam dapibus est id magna fermentum, quis ultrices mi placerat. Pellentesque malesuada orci id molestie condimentum. Mauris commodo nisi nec justo lobortis, a vehicula tortor fringilla. Nullam non eleifend odio. Phasellus laoreet tempor magna, eget ornare enim. Nunc quis eros sed libero scelerisque dictum ac sit amet erat. Donec varius turpis interdum neque sodales, aliquam efficitur sem sodales. Aliquam vel nibh a neque auctor dignissim eu in felis. Pellentesque laoreet, nisl nec consequat tristique, justo velit semper urna, in aliquam dolor lacus id massa. Pellentesque tortor odio, volutpat at porttitor id, malesuada eu lorem. Vestibulum mollis malesuada purus ultrices convallis. Fusce sed massa dolor. Duis tempor rhoncus fringilla. Sed elementum pharetra fermentum. Donec odio tortor, consectetur a mauris vel, condimentum efficitur felis. Phasellus imperdiet purus et imperdiet vestibulum. Cras eu lectus nec dolor posuere ullamcorper vel non nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin efficitur aliquet laoreet. Ut porta tincidunt metus."
+local test = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas congue tortor quis lectus mattis, porta scelerisque magna vestibulum. Praesent enim erat, luctus sit amet ligula et, vulputate rutrum turpis. Aliquam at quam quis risus interdum blandit. Phasellus volutpat dolor id urna viverra tincidunt. Etiam lorem felis, mattis id ligula ac, mollis dictum nibh. Curabitur condimentum sollicitudin auctor. Morbi vitae erat felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nullam scelerisque, justo quis accumsan fringilla, libero dui ornare lectus, vitae volutpat magna odio ac magna. In id congue eros, rhoncus sagittis nibh. Sed efficitur, erat a fringilla facilisis, neque eros iaculis felis, tristique laoreet velit odio eget libero. Donec quis risus sit amet tellus efficitur suscipit. Cras blandit id ligula et rutrum. Maecenas et ante odio. Vestibulum sed accumsan lacus, non mollis est. Duis in eleifend ligula. Nullam sit amet sapien in ligula pretium condimentum nec sit amet tellus. Donec auctor, justo ac facilisis dapibus, ex nisl venenatis lacus, et aliquet nunc turpis facilisis magna. Proin ornare eleifend aliquam. In ullamcorper volutpat urna sed vulputate. Vestibulum a neque ultrices, finibus purus eu, condimentum lorem. "
+local test2 = "Etiam dapibus est id magna fermentum, quis ultrices mi placerat. Pellentesque malesuada orci id molestie condimentum. Mauris commodo nisi nec justo lobortis, a vehicula tortor fringilla. Nullam non eleifend odio. Phasellus laoreet tempor magna, eget ornare enim. Nunc quis eros sed libero scelerisque dictum ac sit amet erat. Donec varius turpis interdum neque sodales, aliquam efficitur sem sodales. Aliquam vel nibh a neque auctor dignissim eu in felis. Pellentesque laoreet, nisl nec consequat tristique, justo velit semper urna, in aliquam dolor lacus id massa. Pellentesque tortor odio, volutpat at porttitor id, malesuada eu lorem. Vestibulum mollis malesuada purus ultrices convallis. Fusce sed massa dolor. Duis tempor rhoncus fringilla. Sed elementum pharetra fermentum. Donec odio tortor, consectetur a mauris vel, condimentum efficitur felis. Phasellus imperdiet purus et imperdiet vestibulum. Cras eu lectus nec dolor posuere ullamcorper vel non nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin efficitur aliquet laoreet. Ut porta tincidunt metus."
 
 --- Text display
 function Text:new (o)
@@ -25,25 +26,25 @@ function Text:textDraw(text,size)
   for i=1,(string.len(text)/size)+1 do
     if i==1 then
       result=string.sub(text,i,size)
-      canvas:drawText(100, 180, result)
+      canvas:drawText(100, 130, result)
     else
       result=string.sub(text,((i-1)*size)+1,(i*size))
       if string.sub(result,1,1) == " " then
         result = string.sub(result,2,size)
       end
-      canvas:drawText(100,180+ (i-1)*30, result)
+      canvas:drawText(100,130+ (i-1)*30, result)
     end
-    --      print(result)
+    --  print(result)
   end
 
 end
 
 function Text:draw(t)
-  local fundo = canvas:new ("fundo.png")
-  local pos_x = 93
-  local pos_y = 60
-  local item_h = 700
-  local item_w = 1600
+  --local fundo = canvas:new ("fundo.png")
+  local pos_x = 30
+  local pos_y = 30
+  local item_h = 550
+  local item_w = 1200
   local font_size = 30
 
   if (self.first == true) then
@@ -53,7 +54,7 @@ function Text:draw(t)
 
   if (t >= 0) then
     self.first=true
-    canvas:attrColor(153,51,204,50)
+    canvas:attrColor(153,51,204,150)
     canvas:drawRect("fill", pos_x, pos_y, item_w, item_h )
     --canvas:compose(pos_x,pos_y,fundo )
     canvas:attrColor(255,255,255,50)
@@ -61,7 +62,7 @@ function Text:draw(t)
     canvas:drawText(pos_x+20, pos_y+45, self.list[t] )
     canvas:attrFont("Alex Brush", 10, "normal")
     --print(canvas:measureText (test))
-    self.textDraw(nil,test,150)
+    self.textDraw(nil,test,100)
     --canvas:drawText(pos_x+20, pos_y+250, test )
     canvas:flush()
   end

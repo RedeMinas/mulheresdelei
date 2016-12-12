@@ -2,7 +2,7 @@
 -- parametros globais
 screen_width, screen_height = canvas:attrSize()
 
-local menu_itens = 9
+local menu_itens = 8
 local menu_text = false
 local menu = false
 
@@ -11,7 +11,9 @@ local menu = false
 --tab_acervo = tabelaMulherese(leiaTabela("media/tbl_episodios.txt"))
 
 
-local menu_table = { "Sobre", "info", "negras", "idosas", "de rua", "encarceradas", "deficientes", "mental", "lesbicas", "trans", "prostitutas", "refugiadas", "do campo", "quilombolas", "jovens"}
+local menu_table = { "Sobre", "info", "negras", "idosas", "de rua",
+"encarceradas", "deficientes", "mental", "lesbicas", "trans", "prostitutas",
+"refugiadas", "do campo", "quilombolas", "jovens"}
 
 MainMenu = { pos = 1, limit=#menu_table, pad=30, list=menu_table }
 Text = { pos = 1, list=menu_table, first=false }

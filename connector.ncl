@@ -16,6 +16,13 @@
           <simpleAction role="stop" max="unbounded" qualifier="par"/>
         </compoundAction>
       </causalConnector>
+
+      <causalConnector id="onBeginSet">
+        <connectorParam name="value"/>
+        <simpleCondition role="onBegin"/>
+        <simpleAction role="set" value="$value"/>
+      </causalConnector>
+
     </connectorBase>
   </head>
 </ncl>
