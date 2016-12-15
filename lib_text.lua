@@ -22,62 +22,74 @@ function Text:shift(x,v)
 end
 
 function Text:textDraw(text,size,pos_x,pos_y)
+
+  if (self.page == 2) then
+    text = test2
+  elseif (self.page == 3) then
+    text = " página 3"
+  elseif (self.page == 4) then
+    text = " pagina 4 - ilustrações"
+  end
+
   canvas:attrFont("Alex Brush", 14, "normal")
   for i=1,(string.len(text)/size)+1 do
     if i==1 then
       result=string.sub(text,i,size)
-      canvas:drawText(box*2, box*2.5 , result)
+      canvas:drawText(grid*2, grid*2.5 , result)
     else
       result=string.sub(text,((i-1)*size)+1,(i*size))
       if string.sub(result,1,1) == " " then
         result = string.sub(result,2,size)
       end
-      canvas:drawText(box*2,box*2.5+(i-1)*30, result)
     end
-    --  print(result)
   end
-
 end
 
-function Text:draw(t)
-  --local fundo = canvas:new ("fundo.png")
+function Text:draw(t,shift)
+
+  -- clear
+  canvas:attrColor(0,0,0,0)
+  canvas:clear(grid,grid,grid*30,grid*13.5 )
+
+  if (shift) then
+    self.page =  self.page+shift
+    if (self.page > 3) then
+      self.page = 1
+    elseif (self.page < -1) then
+      self.page = 3
+    end
+  end
 
   local font_size = 20
   local icon_size = 100
 
-  if (self.first == true) then
-    canvas:attrColor(0,0,0,0)
-    canvas:clear(pos_x,pos_y,background_w,background_h )
-  end
-
   if (t >= 0) then
-
-    self.first=true
 
     --Draw Group Background
     canvas:attrColor(153,151,204,200)
-    canvas:drawRect("fill", box, box, box*30, box*13.5 )
+    canvas:drawRect("fill", grid, grid, grid*30, grid*13.5 )
+
+    --test margin - remove!
 
     canvas:attrColor("red")
-    canvas:drawRect("frame", box*2, box*2, box*24, box*12 )
-
+    canvas:drawRect("frame", grid*2, grid*2, grid*24, grid*12 )
 
     -- Draw Group Icon
     local str = string.format("%02d" , t)
     local icone = canvas:new("media/icon" .. str .. ".png")
-    canvas:compose(((box*30.5)-icon_size), (box*5)-icon_size, icone )
+    canvas:compose(((grid*30.5)-icon_size), (grid*5)-icon_size, icone )
 
     -- Draw Group Title
     canvas:attrColor(255,255,255,255)
     canvas:attrFont("GFS Artemisia", font_size,"normal")
     local textSizeWidth, textSizeHeight = canvas:measureText (self.list[t])
     --print( canvas:measureText (self.list[t]))
-    canvas:drawText((box*30.5-textSizeWidth), box*2-textSizeHeight, self.list[t])
+    canvas:drawText((grid*30.5-textSizeWidth), grid*2-textSizeHeight, self.list[t])
 
     -- Draw Group Text using textDraw() function
     canvas:attrFont("Alex Brush", 10, "normal")
     canvas:attrColor(255,255,255,200)
-    self:textDraw(test,100,box*2,box*2)
+    self:textDraw(test,100,grid*2,grid*2)
     canvas:flush()
   end
 end

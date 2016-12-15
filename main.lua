@@ -1,18 +1,17 @@
 -- parametros globais
 screen_width, screen_height = canvas:attrSize()
-box = screen_width/32
+grid = screen_width/32
 
-local menu_itens = 8
+local menu_itens = 9
 
 -- dofile("lib_tables.lua")
 
 --tab_acervo = tabelaMulherese(leiaTabela("media/tbl_episodios.txt"))
 
-
 local menu_table = { "Mulhere-se", "Informe-se", "Mulheres Idosas","Mulheres Negras", "Mulheres em situação de rua", "Mulheres Encarceradas","Mulheres Deficientes", "Mulheres Usuárias da saúde mental", "Mulheres Lésbicas", "Mulheres Trans", "Mulheres Prostitutas", "Mulheres Refugiadas", "Mulheres do campo", "Mulheres Quilombolas", "Mulheres Jovens"}
 
 MainMenu = { pos = 1, limit=#menu_table, pad=30, list=menu_table, debug=false, settings=false }
-Text = { pos = 1, list=menu_table, first=false }
+Text = { pos = 1, page=1, list=menu_table, first=false }
 
 --MenuAcervo = {pos = 1, limit=26, pad=30, list=tab_acervo }
 
@@ -29,11 +28,11 @@ evento = {
 
 
 -- start 
-s=MainMenu:new{}
-s:draw(menu_itens)
+m=MainMenu:new{}
+m:draw(menu_itens)
 
 t=Text:new{}
-t:draw(s.pos)
+t:draw(m.pos)
 
 -- s=MenuAcervo:new{}
 -- s:draw(itens)
@@ -41,17 +40,23 @@ t:draw(s.pos)
 function handler (evt)
   if (evt.class == 'key' and evt.type == 'press') then
     if evt.key == "CURSOR_LEFT" then
-      menu = true
-      s.pos=s:shift(s.pos,-1)
-      s:draw(menu_itens)
+      m.pos=m:shift(m.pos,-1)
+      t.page=1
+      m:draw(menu_itens)
+      t:draw(m.pos)
     elseif evt.key == "CURSOR_RIGHT" then
-      menu = true
-      s.pos=s:shift(s.pos,1)
-      s:draw(menu_itens)
-      menu_text = true
-    elseif evt.key == "ENTER" then
-      menu_text = true
-      t:draw(s.pos)
+      m.pos=m:shift(m.pos,1)
+      t.page=1
+      m:draw(menu_itens)
+      t:draw(m.pos)
+    elseif evt.key == "CURSOR_UP" then
+
+      t:draw(m.pos,1)
+    elseif evt.key == "CURSOR_DOWN" then
+      
+      t:draw(m.pos,-1)
+--    elseif evt.key == "ENTER" then
+      --t:draw(m.pos)
 -- easter egg
     elseif evt.key == "BLUE" then
       dofile("lib_easter.lua")
@@ -59,7 +64,7 @@ function handler (evt)
         event.timer(1000,easter)
       end
     elseif evt.key == "RED" then
-      s:settings()
+      m:settings()
     end
   end
 end
