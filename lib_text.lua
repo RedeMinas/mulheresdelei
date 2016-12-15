@@ -21,18 +21,18 @@ function Text:shift(x,v)
   end
 end
 
-function Text:textDraw(text,size)
-  canvas:attrFont("Alex Brush", 15, "normal")
+function Text:textDraw(text,size,pos_x,pos_y)
+  canvas:attrFont("Alex Brush", 14, "normal")
   for i=1,(string.len(text)/size)+1 do
     if i==1 then
       result=string.sub(text,i,size)
-      canvas:drawText(100, 130, result)
+      canvas:drawText(box*2, box*2.5 , result)
     else
       result=string.sub(text,((i-1)*size)+1,(i*size))
       if string.sub(result,1,1) == " " then
         result = string.sub(result,2,size)
       end
-      canvas:drawText(100,130+ (i-1)*30, result)
+      canvas:drawText(box*2,box*2.5+(i-1)*30, result)
     end
     --  print(result)
   end
@@ -41,29 +41,43 @@ end
 
 function Text:draw(t)
   --local fundo = canvas:new ("fundo.png")
-  local pos_x = 30
-  local pos_y = 30
-  local item_h = 550
-  local item_w = 1200
-  local font_size = 30
+
+  local font_size = 20
+  local icon_size = 100
 
   if (self.first == true) then
     canvas:attrColor(0,0,0,0)
-    canvas:clear(pos_x,pos_y,item_w,item_h )
+    canvas:clear(pos_x,pos_y,background_w,background_h )
   end
 
   if (t >= 0) then
+
     self.first=true
-    canvas:attrColor(153,51,204,150)
-    canvas:drawRect("fill", pos_x, pos_y, item_w, item_h )
-    --canvas:compose(pos_x,pos_y,fundo )
-    canvas:attrColor(255,255,255,50)
+
+    --Draw Group Background
+    canvas:attrColor(153,151,204,200)
+    canvas:drawRect("fill", box, box, box*30, box*13.5 )
+
+    canvas:attrColor("red")
+    canvas:drawRect("frame", box*2, box*2, box*24, box*12 )
+
+
+    -- Draw Group Icon
+    local str = string.format("%02d" , t)
+    local icone = canvas:new("media/icon" .. str .. ".png")
+    canvas:compose(((box*30.5)-icon_size), (box*5)-icon_size, icone )
+
+    -- Draw Group Title
+    canvas:attrColor(255,255,255,255)
     canvas:attrFont("GFS Artemisia", font_size,"normal")
-    canvas:drawText(pos_x+20, pos_y+45, self.list[t] )
+    local textSizeWidth, textSizeHeight = canvas:measureText (self.list[t])
+    --print( canvas:measureText (self.list[t]))
+    canvas:drawText((box*30.5-textSizeWidth), box*2-textSizeHeight, self.list[t])
+
+    -- Draw Group Text using textDraw() function
     canvas:attrFont("Alex Brush", 10, "normal")
-    --print(canvas:measureText (test))
-    self.textDraw(nil,test,100)
-    --canvas:drawText(pos_x+20, pos_y+250, test )
+    canvas:attrColor(255,255,255,200)
+    self:textDraw(test,100,box*2,box*2)
     canvas:flush()
   end
 end

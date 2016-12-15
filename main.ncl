@@ -6,13 +6,13 @@
     <regionBase>
       <region id="rVideo" width="100%" height="100%" left="0%" top="0%" zIndex="1" />
       <region id="rMain" width="100%" height="100%" left="0%" top="0%" zIndex="2" />
-      <region id="rIcon" width="8%" height="8%" left="80%" top="80%" zIndex="3" />
-      <region id="rExit" width="3%" height="3%" left="90%" top="50%" zIndex="3" />
+      <region id="rIcon" width="5.2083%" height="9.2593%" left="90%" top="85%" zIndex="3" />
+      <region id="rExit" width="3%" height="3%" left="90%" top="90%" zIndex="3" />
     </regionBase>
 
     <descriptorBase>
       <descriptor id="dVideo" region="rVideo" />
-      <descriptor id="dMain" region="rMain" focusBorderWidth="0" />
+      <descriptor id="dMain" region="rMain" focusBorderWidth="0" focusIndex="luaIdx"/>
       <descriptor id="dIcon" region="rIcon" />
       <descriptor id="dExit" region="rExit" />
     </descriptorBase>
@@ -35,7 +35,7 @@
     <media id="mIcon" src="media/icon.png" descriptor="dIcon"/>
     <media id="mExit" src="media/sair.png" descriptor="dExit"/>
 
-    <link id="link_foco"    xconnector="conBase#onBeginSet">
+    <link id="lFoco"    xconnector="conBase#onBeginSet">
       <bind role="onBegin"        component="mMain"/>
       <bind role="set"            component="settings" interface="service.currentKeyMaster">
         <bindParam name="value" value="mMain"/>
